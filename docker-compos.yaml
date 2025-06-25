@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chainlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    environment:
+      - CHAINLIT_FILES_DIR=/tmp/.files
+      - CHAINLIT_CONFIG_PATH=/app/.chainlit/config.toml
+    volumes:
+      - .:/app
+    command: ["chainlit", "run", "./main.py", "--host", "0.0.0.0", "--port", "7860", "--headless"]
